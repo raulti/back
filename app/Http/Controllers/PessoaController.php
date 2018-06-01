@@ -49,7 +49,17 @@ class PessoaController extends Controller
     public function getPessoas()
     {
          try {
-            return $this->pessoaBO->getPessoas();
+            $pessoas = $this->pessoaBO->getPessoas();
+
+            foreach ($pessoas as $pessoa) {
+                $pessoa->cpf = $this->pessoaBO->getCpfFormatado($pessoa->cpf);
+                $pessoa->celular = $this->pessoaBO->getTelefoneFormatado($pessoa->celular);
+                $pessoa->telefone = $this->pessoaBO->getTelefoneFormatado($pessoa->telefone);
+                $pessoa->dt_nascimento = $this->pessoaBO->getDataFormatoView($pessoa->dt_nascimento);
+            }
+
+            return $pessoas;
+
         } catch (\Exception $e) {
             $e->getMessage();
         }
