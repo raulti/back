@@ -23,7 +23,7 @@ class PessoaRepository
      *
      * @param Pessoa $pessoa
      */
-    public function salvar(Pessoa $pessoa)
+    public function salvar($pessoa)
     {
         $data = (array) $pessoa;
 
@@ -40,7 +40,6 @@ class PessoaRepository
     public function getPessoas()
     {
         return $this->pessoa
-               ->where('tipo', $tipo)
                ->where('st_ativo', true)
                ->get();
     }

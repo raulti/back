@@ -20,12 +20,21 @@ class PessoaController extends Controller
      *
      * @param Request $request
      */
-    public function salvar($request)
+    public function salvar(Request $request)
     {
-        $pessoa = (object) $request->all();
+        $pessoaTO = (object) $request->all();
+ 
+        $pessoa = new \stdClass();
+        $pessoa->st_ativo = true;
+        $pessoa->cpf = $pessoaTO->cpf;
+        $pessoa->nome = $pessoaTO->nome;
+        $pessoa->email = $pessoaTO->email;
+        $pessoa->celular = $pessoaTO->celular;
+        $pessoa->sobrenome = $pessoaTO->sobrenome;
+        $pessoa->dt_nascimento = $pessoaTO->dtNascimento;
+        $pessoa->telefone = ! empty($pessoaTO->telefone) ? $pessoaTO->telefone : null;
         
         try {
-            $pessoa->st_ativo = true;
             return $this->pessoaBO->salvar($pessoa);
         } catch (\Exception $e) {
             $e->getMessage();
@@ -37,7 +46,7 @@ class PessoaController extends Controller
      *
      * @param integer $tipo
      */
-    public function getPessoasPorTipo()
+    public function getPessoas()
     {
          try {
             return $this->pessoaBO->getPessoas();

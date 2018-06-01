@@ -23,7 +23,7 @@ class PessoaBO
      *
      * @param Pessoa $pessoa
      */
-    public function salvar(Pessoa $pessoa)
+    public function salvar($pessoa)
     {
         try {
             return $this->pessoaRepository->salvar($pessoa);
@@ -33,7 +33,7 @@ class PessoaBO
     }
 
     /**
-     * Retorna dados de pessoa por parâmetro informado
+     * Retorna registro de pessoa por id informado.
      *
      * @param integer $id
      */
@@ -43,7 +43,17 @@ class PessoaBO
     }
 
     /**
-     * Inativa registro da base de dados
+     * Retorna lista de pessoas.
+     *
+     * @param integer $id
+     */
+    public function getPessoas()
+    {
+        return $this->pessoaRepository->getPessoas();
+    }
+
+    /**
+     * Inativa registro da base de dados.
      */
     public function inativar($id)
     {
